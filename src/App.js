@@ -16,10 +16,11 @@ function App() {
         <HeaderComponent/>
         <div className="container">
           <Routes>
-            <Route path="/" exact element={<ListEmployeeComponent/>}/>
-            <Route path="/employees" element={<ListEmployeeComponent/>}/>
-            <Route path="/add-employee/:id" element={<CreateEmployeeComponent/>}/>
-            <Route path="/view-employee/:id" element={<ViewEmployeeComponent/>}/>
+            <Route path="/" exact Component={ListEmployeeComponent}></Route>
+            <Route path="/employees" Component={ListEmployeeComponent}></Route>
+            <Route path="/add-employee/_add" Component={ListEmployeeComponent}></Route>
+            <Route path="/add-employee/:id" Component={CreateEmployeeComponent}></Route>
+            <Route path="/view-employee/:id" Component={ViewEmployeeComponent}></Route>
             {/* <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route> */}
           </Routes>
         </div>
