@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import EmployeeService from '../services/EmployeeService';
 
 const CreateEmployeeComponent = () => {
@@ -9,8 +9,41 @@ const CreateEmployeeComponent = () => {
     emailId: "",
   });
 
-
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // If the id is '_add', we don't need to fetch any data.
+    if (id !== "_add") {
+      EmployeeService.getEmployeeById(id).then((res) => {
+        const employeeData = res.data;
+        setEmployee({
+          firstName: employeeData.firstName,
+          lastName: employeeData.lastName,
+          emailId: employeeData.emailId
+        });
+      });
+    }
+  }, [id]);
+
+  const saveOrUpdateEmployee = (e) => {
+    e.preventDefault();
+    const employeeData = {
+      firstName: employee.firstName,
+      lastName: employee.lastName,
+      emailId: employee.emailId
+    };
+
+    if (id === '_add') {
+      EmployeeService.createEmployee(employeeData).then(res => {
+        navigate('/employees');
+      });
+    } else {
+      EmployeeService.updateEmployee(employeeData, id).then(res => {
+        navigate('/employees');
+      });
+    }
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,24 +55,33 @@ const CreateEmployeeComponent = () => {
     EmployeeService.createEmployee(employee).then(res => {
       navigate('/employees');
     });
-    
   };
 
   const handleCancel = () => {
     navigate("/employees");
   };
 
+  const getTitle = () => {
+    if (id === '_add') {
+      return <h3 className="text-center">Add Employee</h3>;
+    } else {
+      return <h3 className="text-center">Update Employee</h3>;
+    }
+  }
+  
+
   return (
     <div>
       <div className="container mt-5">
         <div className="row">
           <div className="card col-md-6 offset-md-3 offset-md-3">
-            <h3 className="text-center mt-3">Add Employee</h3>
+            {getTitle()}
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label>First Name</label>
-                  <input placeholder="First Name"
+                  <input
+                    placeholder="First Name"
                     type="text"
                     name="firstName"
                     className="form-control"
@@ -49,7 +91,8 @@ const CreateEmployeeComponent = () => {
                 </div>
                 <div className="form-group">
                   <label>Last Name</label>
-                  <input placeholder="Last Name"
+                  <input
+                    placeholder="Last Name"
                     type="text"
                     name="lastName"
                     className="form-control"
@@ -59,7 +102,8 @@ const CreateEmployeeComponent = () => {
                 </div>
                 <div className="form-group">
                   <label>Email Id</label>
-                  <input placeholder="example@gmail.com"
+                  <input
+                    placeholder="example@gmail.com"
                     type="email"
                     name="emailId"
                     className="form-control"
@@ -67,16 +111,8 @@ const CreateEmployeeComponent = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-                <button className="btn btn-success" type="submit">
-                  Save
-                </button>
-                <button
-                  className="btn btn-danger"
-                  onClick={handleCancel}
-                  style={{ marginLeft: "10px" }}
-                >
-                  Cancel
-                </button>
+                <button className="btn btn-success" onClick={saveOrUpdateEmployee}>Save</button>
+                <button className="btn btn-danger" onClick={handleCancel} style={{marginLeft: "10px"}}>Cancel</button>
               </form>
             </div>
           </div>
@@ -84,6 +120,6 @@ const CreateEmployeeComponent = () => {
       </div>
     </div>
   );
-};
+}
 
 export default CreateEmployeeComponent;

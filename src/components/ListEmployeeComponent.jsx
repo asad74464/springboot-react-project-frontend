@@ -25,7 +25,7 @@ function ListEmployeeComponent() {
   };
 
   const addEmployee = () => {
-    navigate('/add-employee');
+    navigate('/add-employee/_add');
   };
 
   return (
