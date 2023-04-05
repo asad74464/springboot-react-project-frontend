@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmployeeService from '../services/EmployeeService';
 
 const CreateEmployeeComponent = () => {
   const [employee, setEmployee] = useState({
@@ -7,6 +8,7 @@ const CreateEmployeeComponent = () => {
     lastName: "",
     emailId: "",
   });
+
 
   const navigate = useNavigate();
 
@@ -17,7 +19,10 @@ const CreateEmployeeComponent = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("employee => ", employee);
+    EmployeeService.createEmployee(employee).then(res => {
+      navigate('/employees');
+    });
+    
   };
 
   const handleCancel = () => {
