@@ -19,7 +19,7 @@ function ViewEmployeeComponent(props) {
         <div className="card-header"><h3 className="text-center"> View Employee Details</h3></div>
         <div className="card-body">
           <div className="row">
-            <div><b>Employee First Name: </b></div>
+            <b>Employee First Name: </b>
              <div>{employee.firstName}</div>
           </div>
           <div className="row">
@@ -27,7 +27,7 @@ function ViewEmployeeComponent(props) {
             <div> {employee.lastName}</div>
           </div>
           <div className="row">
-            <b> Employee Email ID: </b>
+            <b> Employee Email Address: </b>
             <div> {employee.emailId}</div>
           </div>
           <Link className="btn btn-primary my-2" to={"/"}>
