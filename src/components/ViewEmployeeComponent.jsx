@@ -18,20 +18,20 @@ function ViewEmployeeComponent(props) {
       <div className="card col-md-6 offset-md-3">
         <div className="card-header"><h3 className="text-center"> View Employee Details</h3></div>
         <div className="card-body">
-          <div className="row">
+          <li className="list-group-item">
             <b>Employee First Name: </b>
-             <div>{employee.firstName}</div>
-          </div>
-          <div className="row">
+             {employee.firstName}
+          </li>
+          <li className="list-group-item">
             <b> Employee Last Name: </b>
-            <div> {employee.lastName}</div>
-          </div>
-          <div className="row">
+             {employee.lastName}
+          </li>
+          <li className="list-group-item">
             <b> Employee Email Address: </b>
-            <div> {employee.emailId}</div>
-          </div>
+            {employee.emailId}
+          </li>
           <Link className="btn btn-primary my-2" to={"/"}>
-            Back to Home
+          <i class="bi bi-house"></i>{" "}Back to Home
           </Link>
         </div>
       </div>
