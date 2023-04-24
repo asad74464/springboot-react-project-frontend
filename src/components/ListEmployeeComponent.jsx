@@ -25,15 +25,14 @@ function ListEmployeeComponent() {
   };
 
   const addEmployee = () => {
-    navigate('/add-employee');
+    navigate('/add-employee/_add');
   };
 
   return (
     <div>
       <h2 className="text-center">Employees List</h2>
       <button className="btn btn-primary mb-2" onClick={addEmployee}>
-        {" "}
-        Add Employee
+        <i class="bi bi-person-fill"></i>{" "}Add Employee
       </button>
       <br></br>
       <div className="row">
@@ -57,20 +56,21 @@ function ListEmployeeComponent() {
                     onClick={() => editEmployee(employee.id)}
                     className="btn btn-info"
                   >
-                    Update{" "}
+                    <i class="bi bi-pencil"></i>{" "}Update
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
                     onClick={() => deleteEmployee(employee.id)}
                     className="btn btn-danger"
                   >
-                    Delete{" "}
+                  <i class="bi bi-trash"></i>{" "}Delete
                   </button>
                   <button
                     style={{ marginLeft: "10px" }}
                     onClick={() => viewEmployee(employee.id)}
                     className="btn btn-info"
                   >
+
                     View{" "}
                   </button>
                 </td>

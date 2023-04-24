@@ -24,4 +24,5 @@ class EmployeeService {
   }
 }
 
-export default new EmployeeService();
+const employeeServiceInstance = new EmployeeService();
+export { employeeServiceInstance as default };
